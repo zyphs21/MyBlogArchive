@@ -10,7 +10,7 @@
 
 # 2017
 
-- [Swift 实现启动屏动画](/2017/Swift 实现启动屏动画.md)
+- [Swift 实现启动屏动画](/2017/Swift实现启动屏动画.md)
 - [记一次失败的 Swift 元组数组实践](/2017/记一次失败的Swift元组数组实践.md)
 - [自定义 UISegmentedControl 样式](/2017/自定义UISegmentedControl样式.md)
 - [HSStockChart介绍](/2017/HSStockChart介绍.md)
