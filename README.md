@@ -7,6 +7,7 @@
 - [通过RunScript给iOS项目自增版本号(Versioin和Build)](/2018/通过RunScript给iOS项目自增版本号(Versioin和Build).md)
 - [PathToGo诞生记](/2018/PathToGo诞生记.md)
 - [用SwiftGen管理UIImage等的String-based接口](/2018/用SwiftGen管理UIImage等的String-based接口.md)
+- [CocoaPods相关笔记](/2018/CocoaPods相关笔记.md)
 
 # 2017
 
