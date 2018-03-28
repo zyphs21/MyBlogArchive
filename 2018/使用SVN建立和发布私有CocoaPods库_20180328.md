@@ -15,7 +15,8 @@ date: 2018-03-28 15:32:42
 - tags：发布的版本
 
 比如说我们已经写好了一个 CocoaPods 的库，它的名字是 xxxKit，那么它应该在看起来是这样的：
-![]()
+![](https://raw.githubusercontent.com/zyphs21/MyBlogArchive/master/2018/Resources/20180328_struct.jpeg)
+
 
 # 建立 CocoaPods 库
 
@@ -43,19 +44,22 @@ end
 
 `s.source = { :svn => "http://xxxx/xxxKit/", :tag => s.version.to_s }`
 
+
 # 打 tags 发布一个版本
 
 这里以 `Cornerstone` 这个 Mac 端的 SVN 工具来说明。
 
 1. 去到远程库里进行打 tags，注意只有在远程库操作才能打 tag。
     
-    ![]()
+    ![](https://raw.githubusercontent.com/zyphs21/MyBlogArchive/master/2018/Resources/20180328_tag.jpeg)
     
 2. 选择在 trunk 主干上 `右键` -> `Tag…`，然后输入 tag 标签，比如 v0.1.1
 
-    ![]()
+    ![](https://raw.githubusercontent.com/zyphs21/MyBlogArchive/master/2018/Resources/20180328_createtag.png)
     
 之后只要有开发到了新的版本了，按照这样先打 tag。
+![](https://raw.githubusercontent.com/zyphs21/MyBlogArchive/master/2018/Resources/20180328_tags.png)
+
     
 # 使用私有库
     
