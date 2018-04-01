@@ -20,7 +20,9 @@
 
 # About me
 
-> E-mail: hansenhs21@live.com
+> E-mail: hansenhs21@live.com   
+> GitHub: [zyphs21](https://github.com/zyphs21)   
+> 掘金：[hanson21](https://juejin.im/user/58748a38a22b9d0058a104d5)
 
 > 我的博客： [myhanson.com](www.myhanson.com)
 
