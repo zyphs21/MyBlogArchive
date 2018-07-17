@@ -10,6 +10,7 @@
 - 03-22：[CocoaPods 相关笔记](/2018/CocoaPods相关笔记_20180322.md)
 - 03-28：[使用 SVN 建立和发布私有 CocoaPods 库](/2018/使用SVN建立和发布私有CocoaPods库_20180328.md) 
 - 04-27：[NSTimer避免循环引用说明](/2018/NSTimer避免循环引用说明.md) 🔥
+- 05-18：[上架个小工具-ImageGotcha](/2018/上架个小工具-ImageGotcha.md)
 
 # 2017
 
