@@ -1,14 +1,13 @@
 ---
 title: Swift的泛型小总结
-date: 2018-08-05 16:34:17
+date: '2018-08-05T16:34:17.000Z'
 ---
 
-[TOC]
+# Swift的泛型小总结
 
-----
+\[TOC\]
 
 **本文针对网上一些关于泛型的知识点进行汇总和总结，已在文中标记出参考文章的链接**
-
 
 > 泛型是程序设计语言的一种特性。允许程序员在强类型程序设计语言中编写代码时定义一些可变部分，那些部分在使用前必须作出指明。
 
@@ -16,13 +15,13 @@ date: 2018-08-05 16:34:17
 
 泛型代码可以让你写出根据自我需求定义、适用于任何类型的，灵活且可重用的函数和类型。它的可以让你避免重复的代码，用一种清晰和抽象的方式来表达代码的意图。
 
-泛型是 Swift 强大特征中的其中一个，许多 Swift 标准库是通过泛型代码构建出来的。事实上，泛型的使用贯穿了整本语言手册，只是你没有发现而已。 <span style="border-bottom:2px solid brown;">例如，Swift 的数组和字典类型都是泛型集。你可以创建一个Int数组，也可创建一个String数组，或者甚至于可以是任何其他 Swift 的类型数据数组。同样的，你也可以创建存储任何指定类型的字典（dictionary），而且这些类型可以是没有限制的。</span>
+泛型是 Swift 强大特征中的其中一个，许多 Swift 标准库是通过泛型代码构建出来的。事实上，泛型的使用贯穿了整本语言手册，只是你没有发现而已。 例如，Swift 的数组和字典类型都是泛型集。你可以创建一个Int数组，也可创建一个String数组，或者甚至于可以是任何其他 Swift 的类型数据数组。同样的，你也可以创建存储任何指定类型的字典（dictionary），而且这些类型可以是没有限制的。
 
 > [参考](https://swift.gg/2015/09/16/swift-generics/)
 
 ## 实现栈的例子，说明泛型的作用
 
-```Swift
+```swift
 class IntStack{
   // 采用数组作为容器保存数据 类型为Int
   private var stackItems:[Int] = []
@@ -41,15 +40,15 @@ class IntStack{
 
 这栈能够处理`Int`类型数据。但是如果要一个能够处理`String`类型的栈呢？我们需要替换所有`Int`为`String`，不过这显然是一个糟糕的解决方法。此外另外一种方法是用`AnyObject`，如下:
 
-```
+```text
 class AnyObjectStack{
   // 采用数组作为容器保存数据 类型为AnyObject
   private var stackItems:[AnyObject] = []
-  
+
   func pushItem(item:AnyObject){
     stackItems.append(item)    
   }
-  
+
   func popItem()->AnyObject?{
     let lastItem = stackItems.last
     stackItems.removeLast()
@@ -58,11 +57,11 @@ class AnyObjectStack{
 }
 ```
 
-不过这种情况下我们就失去了数据类型的安全，并且每当我们对栈进行操作时,都需要进行一系列繁琐的类型转换(casting操作,使用as来进行类型转换)
+不过这种情况下我们就失去了数据类型的安全，并且每当我们对栈进行操作时,都需要进行一系列繁琐的类型转换\(casting操作,使用as来进行类型转换\)
 
-- 通过泛型来解决：
+* 通过泛型来解决：
 
-```
+```text
 class Stack<T> {
 
   private var stackItems: [T] = []  
@@ -70,7 +69,7 @@ class Stack<T> {
   func pushItem(item:T) {
     stackItems.append(item)
   }  
-  
+
   func popItem() -> T? {
     let lastItem = stackItems.last
     stackItems.removeLast()
@@ -80,8 +79,9 @@ class Stack<T> {
 }
 ```
 
-泛型定义方式:由一对尖括号(<>)包裹，命名方式通常为大写字母开头(这里我们命名为T)。在初始化阶段，我们通过明确的类型(这里为Int)来定义参数,之后编译器将所有的泛型T替换成Int类型:
-```
+泛型定义方式:由一对尖括号\(&lt;&gt;\)包裹，命名方式通常为大写字母开头\(这里我们命名为T\)。在初始化阶段，我们通过明确的类型\(这里为Int\)来定义参数,之后编译器将所有的泛型T替换成Int类型:
+
+```text
 // 指定了泛型T 就是 Int 
 // 编译器会替换所有T为Int
 let aStack = Stack<Int>()
@@ -92,24 +92,23 @@ if let lastItem = aStack.popItem() {
 }
 ```
 
-
 ## 泛型扩展
 
 > [参考](http://swifter.tips/extension-generic/)
 
 Swift 对于泛型的支持使得我们可以避免为类似的功能多次书写重复的代码，这是一种很好的简化。而对于泛型类型，我们也可以使用 extension 为泛型类型添加新的方法。
 
-与为普通的类型添加扩展不同的是，<span style="border-bottom: 2px solid brown">泛型类型在类型定义时就引入了类型标志，我们可以直接使用</span>。例如 Swift 的 Array 类型的定义是：
+与为普通的类型添加扩展不同的是，泛型类型在类型定义时就引入了类型标志，我们可以直接使用。例如 Swift 的 Array 类型的定义是：
 
-```
+```text
 public struct Array<Element> : CollectionType, Indexable, ... {
     //...
 }
 ```
 
-在这个定义中，已经声明了 `Element` 为泛型类型。在为类似这样的泛型类型写扩展的时候，我们不需要在 extension 关键字后的声明中重复地去写 `<Element>` 这样的泛型类型名字 (其实编译器也不允许我们这么做)，在扩展中可以使用和原来所定义一样的符号即可指代类型本体声明的泛型。比如我们想在扩展中实现一个 random 方法来随机地取出 Array 中的一个元素
+在这个定义中，已经声明了 `Element` 为泛型类型。在为类似这样的泛型类型写扩展的时候，我们不需要在 extension 关键字后的声明中重复地去写 `<Element>` 这样的泛型类型名字 \(其实编译器也不允许我们这么做\)，在扩展中可以使用和原来所定义一样的符号即可指代类型本体声明的泛型。比如我们想在扩展中实现一个 random 方法来随机地取出 Array 中的一个元素
 
-```
+```text
 extension Array {
     var random: Element? {
         return self.count != 0 ?
@@ -127,9 +126,9 @@ ranks.random!
 // 随机输出是这四个数字中的某个
 ```
 
-<span style="border-bottom: 2px solid brown">在扩展中是不能添加整个类型可用的新泛型符号的，但是对于某个特定的方法来说，我们可以添加 T 以外的其他泛型符号</span>。比如在刚才的扩展中加上：
+在扩展中是不能添加整个类型可用的新泛型符号的，但是对于某个特定的方法来说，我们可以添加 T 以外的其他泛型符号。比如在刚才的扩展中加上：
 
-```
+```text
 func appendRandomDescription
     <U: CustomStringConvertible>(input: U) -> String {
 
@@ -143,7 +142,7 @@ func appendRandomDescription
 
 我们限定了只接受实现了 `CustomStringConvertible` 的参数作为参数，然后将这个内容附加到自身的某个随机元素的描述上。因为参数 input 实现了 `CustomStringConvertible`，所以在方法中我们可以使用 description 来获取描述字符串。
 
-```
+```text
 let languages = ["Swift","ObjC","C++","Java"]
 languages.random!
 
@@ -164,7 +163,7 @@ languages.appendRandomDescription(ranks.random!)
 
 typealias 是用来为已经存在的类型重新定义名字的，通过命名，可以使代码变得更加清晰。使用的语法也很简单，使用 typealias 关键字像使用普通的赋值语句一样，可以将某个已经存在的类型赋值为新的名字。比如在计算二维平面上的距离和位置的时候，我们一般使用 Double 来表示距离，用 CGPoint 来表示位置：
 
-```
+```text
 func distanceBetweenPoint(point: CGPoint, toPoint: CGPoint) -> Double {
     let dx = Double(toPoint.x - point.x)
     let dy = Double(toPoint.y - point.y)
@@ -181,7 +180,7 @@ let distance: Double =  distanceBetweenPoint(origin, point)
 
 如果我们使用 typealias，就可以将这种转换直接写在代码里，从而减轻阅读和维护的负担：
 
-```
+```text
 import UIKit
 
 typealias Location = CGPoint
@@ -206,7 +205,7 @@ let distance: Distance =  distanceBetweenPoint(origin, toLocation: point)
 
 泛型类型的确定性得到保证后，才可以重命名
 
-```
+```text
 class Person<T> {}
 
 typealias WorkId = String
@@ -221,7 +220,7 @@ typealias Worker = Person<WorkId>
 
 新建一个Container协议
 
-```
+```text
 protocol Container {
     associatedtype Item
     mutating func append(_ item: Item)
@@ -232,7 +231,7 @@ protocol Container {
 
 可以给协议里的关联类型添加类型注释，让遵守协议的类型必须遵循这个约束条件。例如，下面的代码定义了一个 Item 必须遵循 Equatable 的 Container 类型：
 
-```
+```text
 protocol Container {
     associatedtype Item: Equatable
     mutating func append(_ item: Item)
@@ -243,7 +242,7 @@ protocol Container {
 
 生成遵循Container协议的泛型Stack:
 
-```
+```text
 struct Stack<T>: Container {
     // original Stack<T> implementation
     var items = [T]()
@@ -272,7 +271,7 @@ struct Stack<T>: Container {
 
 ### 实现Equtable协议,使得泛型可以比较
 
-```
+```text
 class Stack<T:Equatable> {
 
   private var stackItems: [T] = []
@@ -302,7 +301,7 @@ class Stack<T:Equatable> {
 
 ### Where 语句
 
-```
+```text
 func allItemsMatch<
     C1: Container, C2: Container
     where C1.ItemType == C2.ItemType, C1.ItemType: Equatable>
@@ -324,5 +323,4 @@ func allItemsMatch<
         return true
 }
 ```
-
 

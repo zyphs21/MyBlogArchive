@@ -1,20 +1,25 @@
 ---
 title: Swift 实现启动屏动画
-date: 2017-12-08 10:13:30
+date: '2017-12-08T10:13:30.000Z'
 ---
+
+# Swift实现启动屏动画
+
 > Github: [SplashAnimate](https://github.com/zyphs21/SplashAnimate)
 
-# 准备工作：
+## 准备工作：
+
 首先我们需要确定作为宣传的图片的宽高比，这个一般是与 UI 确定的。一般启动屏展示会有上下两部分，上面是宣传图片，下面是 App 的 Logo。
 
-# 实现基本思路：
+## 实现基本思路：
+
 在 LaunchScreen 结束后，在 AppDelegate 中将 rootViewController 指向展示广告用的 AdViewController，在AdViewController 中设置一段时间后自己销毁，并提供回调方法在 AppDelegate 中将 rootViewController 指向 App 真正的首页。
 
-<!-- more -->
+## 实现细节：
 
-# 实现细节：
 新建一个 AdViewController 用于放置广告宣传等展示.注意有一个回调方法。
-```Swift
+
+```swift
 class AdViewController: UIViewController {
     // 用于 AdViewController 销毁后的回调
     var completion: (() -> Void)?
@@ -27,8 +32,10 @@ class AdViewController: UIViewController {
     }
 }
 ```
+
 在 ViewDidLoad 方法中配置广告图,同时判断 iPhoneX的特殊情况
-```Swift
+
+```swift
 override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -57,10 +64,12 @@ override func viewDidLoad() {
     }
 }
 ```
+
 上面代码中有几个注意的:
 
 因为图片要撑满屏幕的宽度，所以宽度是固定的，根据图片的高宽比，算出图片实际应有的高度，这样图片可以在各个尺寸的 iPhone 中才不会因为拉伸而变形。但是因为 iPhoneX 特殊的宽高比，所以还是要为它特定一张图片，不然即使图片在 iPhoneX 上不变形，图片所占的高度会太小，或者顶部被刘海遮挡内容而不美观。
-```Swift
+
+```swift
 var adViewHeight = (1040 / 720) * screenWidth
 var imageName = "start_page"
 if UIDevice.isiPhoneX() {
@@ -68,8 +77,10 @@ if UIDevice.isiPhoneX() {
     imageName = "start_page_x"
 }
 ```
+
 上面判断是否为 iPhoneX 我是在 UIDevice 里扩展了一个方法：
-```Swfit
+
+```text
 extension UIDevice {
     public static func isiPhoneX() -> Bool {
         if UIScreen.main.bounds.height == 812 {
@@ -79,16 +90,19 @@ extension UIDevice {
     }
 }
 ```
+
 还有注意在执行销毁时调用回调方法
-```Swift
+
+```swift
 let time: TimeInterval = 1.0
 DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + time) {
     self.dismissAdView()
 }
 ```
 
-在 AppDelegate 中 didFinishLaunchingWithOptions 方法中调用下面的 setUpWindowAndRootView() 来管理页面展示
-```Swift
+在 AppDelegate 中 didFinishLaunchingWithOptions 方法中调用下面的 setUpWindowAndRootView\(\) 来管理页面展示
+
+```swift
 extension AppDelegate {
     func setUpWindowAndRootView() {
         window = UIWindow(frame: UIScreen.main.bounds)
@@ -105,8 +119,10 @@ extension AppDelegate {
     }
 }
 ```
+
 注意在 AdViewController 销毁的回调方法中，将 AdViewController 的 view 传给真正的首页，让首页来执行动画
-```Swift
+
+```swift
 adVC.completion = {
     let vc = ViewController()
     // 将 AdViewController 的 view 传给真正的首页，让首页来执行动画
@@ -116,7 +132,8 @@ adVC.completion = {
 ```
 
 在首页 ViewController 里我们有如下方法来执行 AdViewController 的销毁动画，这里配置的动画是常见的扩大渐变消失
-```Swift
+
+```swift
 private var advertiseView: UIView?
 var adView: UIView? {
     didSet {

@@ -1,20 +1,25 @@
 ---
 title: 通过RunScript给iOS项目自增版本号(Versioin和Build)
-date: 2018-03-14 00:38:20
+date: '2018-03-14T00:38:20.000Z'
 ---
 
-# 需求分析
-- 在打包应用之后，需要自增 **Version 的最后一位** 和 **Build** 的值。
-![](https://user-gold-cdn.xitu.io/2018/3/14/162201d291ebc6c1?w=690&h=136&f=png&s=11268)
-- 只在 Archive(Release) 的时候触发该自增。
+# 通过RunScript给iOS项目自增版本号\(Versioin和Build\)\_20180314
 
-<!-- more -->
+## 需求分析
 
-# 添加 RunScript
-在 `项目Target` -> `Build Phases` -> `点击+号` -> `New Run Script Phase`
+* 在打包应用之后，需要自增 **Version 的最后一位** 和 **Build** 的值。
+
+  ![](https://user-gold-cdn.xitu.io/2018/3/14/162201d291ebc6c1?w=690&h=136&f=png&s=11268)
+
+* 只在 Archive\(Release\) 的时候触发该自增。
+
+## 添加 RunScript
+
+在 `项目Target` -&gt; `Build Phases` -&gt; `点击+号` -&gt; `New Run Script Phase`
 
 然后添加如下内容：
-```Bash
+
+```bash
 if [ $CONFIGURATION == Release ]; then
 echo "当前为 Release Configuration,开始自增 Build"
 plist=${INFOPLIST_FILE}
@@ -37,10 +42,13 @@ echo $CONFIGURATION "当前不为 Release Configuration"
 fi
 ```
 
-# 注意
+## 注意
+
 因为我的版本号是`xx.xx.xx`这样的形式，所以我以 `.` 拆分版本号后，取出第三个值来增加，最后再拼接回来。
-```
+
+```text
 versionNum=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "${plist}")
 # 这里取出第三个值
 thirdPartVersonNum=`echo $versionNum | awk -F "." '{print $3}'`
 ```
+

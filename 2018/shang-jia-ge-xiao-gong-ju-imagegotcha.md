@@ -1,7 +1,9 @@
 ---
 title: 上架个小工具-ImageGotcha
-date: 2018-05-18 09:30:12
+date: '2018-05-18T09:30:12.000Z'
 ---
+
+# 上架个小工具-ImageGotcha
 
 上架了个小工具。`ImageGotcha` 是一个 `Safari` 的 `Action Extension`，它可以提取当前网页的图片方便查看和批量保存，比如可以去某些 `Instagram` 用户的主页批量下载图片，或者下载 `Bing` 的每日背景图等等。点击 [这里](https://itunes.apple.com/cn/app/imagegotcha/id1384107130?mt=8) 到 `AppStore` 查看。
 
@@ -13,9 +15,5 @@ date: 2018-05-18 09:30:12
 
 这是演示如何启动 `ImageGotcha` 的 `Action Extension`：
 
-<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=o1339za69qd&auto=0" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
-
 这是操作的演示：
-
-<embed src="https://imgcache.qq.com/tencentvideo_v1/playerv3/TPout.swf?max_age=86400&v=20161117&vid=w1339c8t6nc&auto=0" allowFullScreen="true" quality="high" width="480" height="400" align="middle" allowScriptAccess="always" type="application/x-shockwave-flash"></embed>
 
