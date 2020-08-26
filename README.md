@@ -29,7 +29,7 @@
 
 | 公众号: HansonTalk | 微信: hansenhs21 |
 | :---: | :---: |
-| ![HansonTalk](https://cdn.jsdelivr.net/gh/zyphs21/cdn-assets/qrcode/HansonTalk.jpg) | ![Hanson](https://cdn.jsdelivr.net/gh/zyphs21/cdn-assets/qrcode/hansenhs21.jpg) |
+| ![HansonTalk](https://cdn.jsdelivr.net/gh/zyphs21/cdn-assets/qrcode/HansonTalk.jpg) | ![Hanson](https://cdn.jsdelivr.net/gh/zyphs21/cdn-assets@master/qrcode/hansenhs21.jpg) |
 
 
 
