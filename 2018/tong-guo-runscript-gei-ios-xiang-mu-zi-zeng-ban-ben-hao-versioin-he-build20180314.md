@@ -3,7 +3,7 @@ title: 通过RunScript给iOS项目自增版本号(Versioin和Build)
 date: '2018-03-14T00:38:20.000Z'
 ---
 
-# 通过RunScript给iOS项目自增版本号\(Versioin和Build\)\_20180314
+# 通过RunScript给iOS项目自增版本号\(Version和Build\)\_20180314
 
 ## 需求分析
 

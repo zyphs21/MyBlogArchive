@@ -1,63 +1,38 @@
 # NSTimer避免循环引用说明
 
-\[TOC\]
-
-## NSTimer 避免循环引用
-
-### 添加 Category/Extension \(iOS10之前\)
+## 添加 Category/Extension \(iOS10之前\)
 
 #### Objective-C
 
 1. 为 NSTimer 添加一个 category，添加一个传入 block 参数的接口。==将此 block 作为 NSTimer 的 userInfo 参数传入，而 NSTimer 的 target 为 timer 自己==，从而避免 NSTimer 持有 ViewController，避免了循环引用。代码如下:
 
-   \`\`\`
-
-   // NSTimer+BlocksSupport.h
-
-## import &lt;Foundation/Foundation.h&gt;
-
-@interface NSTimer \(BlocksSupport\)
-
-* \(NSTimer \*\)hs\_scheduledTimerWithTimeInterval:\(NSTimeInterval\)interval 
-
-  ```text
-                                   repeats:(BOOL)repeats
-                                     block:(void(^)())block;
-  ```
-
-  @end
-
+```swift
+// NSTimer+BlocksSupport.h
+import <Foundation/Foundation.h>
+@interface NSTimer (BlocksSupport)
+(NSTimer *)hs_scheduledTimerWithTimeInterval:(NSTimeInterval)interval 
+                                 repeats:(BOOL)repeats
+                                   block:(void(^)())block;
+@end
 // NSTimer+BlocksSupport.m
-
-## import "NSTimer+BlocksSupport.h"
-
-@implementation NSTimer \(BlocksSupport\)
-
-* \(NSTimer \*\)hs\_scheduledTimerWithTimeInterval:\(NSTimeInterval\)interval
-
-  ```text
-                                   repeats:(BOOL)repeats
-                                     block:(void(^)())block;
-  ```
-
-  {
-
-    return \[self scheduledTimerWithTimeInterval:interval
-
-  ```text
-                                     target:self
-                                   selector:@selector(hs_invokeBlock:)
-                                   userInfo:[block copy]
-                                    repeats:repeats];
-  ```
-
-  }
-
-* \(void\)hs\_invokeBlock:\(NSTimer \*\)timer { void \(^block\)\(\) = timer.userInfo; if\(block\) { block\(\); } } @end
-
-  \`\`\`
-
-* 使用这个Category方法
+import "NSTimer+BlocksSupport.h"
+@implementation NSTimer (BlocksSupport)
+(NSTimer *)hs_scheduledTimerWithTimeInterval:(NSTimeInterval)interval
+                                 repeats:(BOOL)repeats
+                                   block:(void(^)())block;
+{
+  return [self scheduledTimerWithTimeInterval:interval
+                                   target:self
+                                 selector:@selector(hs_invokeBlock:)
+                                 userInfo:[block copy]
+                                  repeats:repeats];
+}
+(void)hs_invokeBlock:(NSTimer *)timer {
+  void (^block)() = timer.userInfo; 
+  if(block) { block(); } 
+} 
+@end
+```
 
 创建NSTimer
 
@@ -109,7 +84,7 @@ extension Timer {
 }
 ```
 
-### 使用新的 API \(iOS10 之后\)
+## 使用新的 API \(iOS10 之后\)
 
 iOS 10 之后， NSTimer 添加了支持传入 block 类型参数的 API
 

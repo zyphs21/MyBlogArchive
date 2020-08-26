@@ -73,46 +73,35 @@ SwiftGen 提供了好几种的集成方式，我这里只介绍我自己比较�
 * 将解压后的 `swiftgen-5.2.1` 文件夹放到项目所在的目录下\(存放`xxx.xcodeproj` 的位置\)，可以将文件夹的名字改为`SwiftGen5`简洁一点。
 * 进入到 `SwiftGen5` 里的 `templates/xcassets` 目录下，这里面可以看到有不少模板，我们选择 `swift4.stencil` 复制一份，命名为 `my-swift4.stencil` 然后我们就可以在里面修改我们自己想要的模板，我主要是想把 macOS 等其它平台的一些判断代码给删掉:
 
-  \`\`\`Swift
-
-  // Generated using SwiftGen, using my-templete created by Hanson
-
+```swift
+// Generated using SwiftGen, using my-templete created by Hanson
 import UIKit.UIImage
-
 typealias  = UIImage
-
-@available\(\*, deprecated, renamed: ""\) typealias Type = 
-
+@available(*, deprecated, renamed: "") typealias Type = 
 struct  { fileprivate var name: String
-
-var image:  { let bundle = Bundle\(for: BundleToken.self\) let image = \(named: name, in: bundle, compatibleWith: nil\) guard let result = image else { fatalError\("Unable to load image named \(name\)."\) } return result } }
-
+var image:  { let bundle = Bundle(for: BundleToken.self) let image = (named: name, in: bundle, compatibleWith: nil) guard let result = image else { fatalError("Unable to load image named (name).") } return result } }
 enum  {
-
 }
-
-extension  { convenience init!\(asset: \) { let bundle = Bundle\(for: BundleToken.self\) self.init\(named: asset.name, in: bundle, compatibleWith: nil\) } }
-
+extension  { convenience init!(asset: ) { let bundle = Bundle(for: BundleToken.self) self.init(named: asset.name, in: bundle, compatibleWith: nil) } }
 private final class BundleToken {}
-
 // No assets found
-
-```text
-## 2.建立RunScript
-- 在`Xcode`中，进入到项目的`Target`，选择`Build Phases`,然后点击左上角的 `+` 号后点击 `New Run Script Phase`在新建的RunScript里添加如下内容：
-    ```bash
-    if which "$PROJECT_DIR"/SwiftGen5/bin/swiftgen >/dev/null;
-    then
-    set -e
-    "$PROJECT_DIR"/SwiftGen5/bin/swiftgen xcassets -t my-swift4 "$PROJECT_DIR/swiftGenExample/Assets.xcassets" --output "$PROJECT_DIR/swiftGenExample/ImageCode/ImageAsset.swift"
-    else
-    echo "##run echo warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
-    fi
 ```
 
+### 2.建立RunScript
+
+在`Xcode`中，进入到项目的`Target`，选择`Build Phases`,然后点击左上角的 `+` 号后点击 `New Run Script Phase`在新建的RunScript里添加如下内容：
+
 ```text
+if which "$PROJECT_DIR"/SwiftGen5/bin/swiftgen >/dev/null;
+then
+set -e
+"$PROJECT_DIR"/SwiftGen5/bin/swiftgen xcassets -t my-swift4 "$PROJECT_DIR/swiftGenExample/Assets.xcassets" --output "$PROJECT_DIR/swiftGenExample/ImageCode/ImageAsset.swift"
+else
+echo "##run echo warning: SwiftGen not installed, download it from https://github.com/SwiftGen/SwiftGen"
+fi
+```
+
 这段 `Run Script` 作用就是利用 SwiftGen 生成代码后写入到 `ImageAsset.swift` 文件中。
-```
 
 * Build 一下project，我们就可以在 `/swiftGenExample/ImageCode/` 目录下看到 `ImageAsset.swift`，此时该文件还没有被项目索引，所以把它拖进项目Xcode对应的目录下就行了，之后即使我们添加了新的图片或者删掉旧的图片，只要每次Build一下项目，代码就会自动更新了。
 
