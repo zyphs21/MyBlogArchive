@@ -1,9 +1,5 @@
 # README
 
-## MyBlogArchive
-
-该仓库是我写的文章备份。部分文章也可以在 www.myhanson.com 查看。
-
 ## 2018
 
 * 03-02：[PathToGo 诞生记](2018/pathtogo-dan-sheng-ji-20180302.md)
@@ -23,20 +19,17 @@
 * 12-08：[用 SwiftGen 管理 UIImage 等的 String-based 接口](2017/yong-swiftgen-guan-li-uiimage-deng-de-stringbased-jie-kou-20171208.md)
 * 12-08：[Swift 实现启动屏动画](2017/swift-shi-xian-qi-dong-ping-dong-hua.md)
 
-## About me
+## 🙋🏻‍♂️ Where to find me
 
-> E-mail: hansenhs21@live.com  
-> GitHub: [zyphs21](https://github.com/zyphs21)  
-> 掘金：[hanson21](https://juejin.im/user/58748a38a22b9d0058a104d5)
->
-> 我的博客： [myhanson.com](https://github.com/zyphs21/MyBlogArchive/tree/a67a857b0a0f18487e9d2d2ac13ccd03fd96ea62/www.myhanson.com)
->
-> 我的公众号：`hansontalks`  
-> ![](https://raw.githubusercontent.com/zyphs21/HSStockChart/master/DemoScreenshot/qrcode_for_hansontalk.jpg)
+* 🌎  On Blog at [myhanson.com](myhanson.com)
+* 🐦  On Twitter at [@yuanpingzhang](https://twitter.com/yuanpingzhang)
+* 👁  On Weibo at [@汉森HS](https://weibo.com/1775951885/)
+* 📘  On Juejin at [hanson21](https://juejin.im/user/58748a38a22b9d0058a104d5)
+* 📧  On Email at `hansenhs21@live.com`
 
-请我喝杯咖啡：
+| 公众号: HansonTalk | 微信: hansenhs21 |
+| :---: | :---: |
+| ![HansonTalk](https://cdn.jsdelivr.net/gh/zyphs21/cdn-assets/qrcode/HansonTalk.jpg) | ![Hanson](https://cdn.jsdelivr.net/gh/zyphs21/cdn-assets/qrcode/hansenhs21.jpg) |
 
-| ![AliPay](https://raw.githubusercontent.com/zyphs21/MyBlogArchive/master/OtherResources/alipay.jpg) | ![AliPay](https://raw.githubusercontent.com/zyphs21/MyBlogArchive/master/OtherResources/wechatpay.jpg) |
-| :--- | :--- |
 
 
